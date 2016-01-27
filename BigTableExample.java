@@ -8,7 +8,8 @@ public class BigTableExample {
         BigTable<String> table = new BigTable<>();
         table.setElement("Object1", 1000, 1000);
         table.setElement("Object2", 10000, 10000);
-        String object = table.getElement(10000, 10000);
+        table.setElement("Object3", 100000, 1000);
+        String object = table.getElement(100000, 1000);
         System.out.println(object);
     }
 }
@@ -93,8 +94,10 @@ class BigTable<T> {
         while(head.getCoordY() != y && head.hasNextY()){
             head = head.getNextY();
         }
-
-        return head.getValue();
+        if(head.getCoordX() == x && head.getCoordY() == y)
+            return head.getValue();
+        else
+            return null;
     }
 
     public void setElement(T obj, int x, int y){
